@@ -1,0 +1,5 @@
+.env
+.koksmat
+*.sppkg
+*.xml
+.data
