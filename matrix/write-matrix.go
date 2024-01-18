@@ -22,9 +22,15 @@ func WriteMatrix() (filePath string, e error) {
 	if err != nil {
 		return filePath, err
 	}
+
+	matrix := []Column{}
+	for k, v := range data {
+		matrix = append(matrix, Column{Title: k, Rows: v})
+	}
+
 	filePath = path.Join(viper.GetString("WORKDIR"), "matrix.json")
 
-	file, err := json.MarshalIndent(data, "", " ")
+	file, err := json.MarshalIndent(matrix, "", " ")
 	if err != nil {
 		fmt.Println(err)
 		return filePath, err

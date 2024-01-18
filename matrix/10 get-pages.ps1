@@ -2,6 +2,8 @@
 title: Get Matrix Pages 
 connection: sharepoint
 output: matrix-pages.json
+tag: matrix-pages
+api: generate
 ---
 
 ## A file is extract from SharePoint containing the pages and the metadata needed for a Matrix web

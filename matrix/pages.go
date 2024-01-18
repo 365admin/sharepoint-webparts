@@ -6,14 +6,12 @@ import (
 	"os"
 	"path"
 
-	"github.com/365admin/sharepoint-webparts/.app/sharedcommands"
-	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
 type Page struct {
-	SortOrder  any    `json:"SortOrder"`
-	ValueChain any    `json:"ValueChain"`
+	SortOrder  string `json:"SortOrder"`
+	ValueChain string `json:"ValueChain"`
 	Title      string `json:"Title"`
 	FileRef    string `json:"FileRef"`
 	ID         int    `json:"ID"`
@@ -44,7 +42,7 @@ func ReadPages() ([]Page, error) {
 }
 
 type Row struct {
-	SortOrder int    `json:"SortOrder"`
+	SortOrder string `json:"SortOrder"`
 	Title     string `json:"Title"`
 	FileRef   string `json:"FileRef"`
 	ID        int    `json:"ID"`
@@ -55,49 +53,32 @@ type Column struct {
 	Rows      []Row  `json:"Rows"`
 }
 
-func AnalysePages() ([]Column, error) {
+func AnalysePages() (map[string][]Row, error) {
 	pages, err := ReadPages()
 	if err != nil {
 		return nil, err
 	}
 
-	columns := []Column{}
+	//columns := []Column{}
+
+	columns := map[string][]Row{}
 
 	for _, page := range pages {
-		sortOrder := page.SortOrder.(int)
-		foundColumn := false
-		for _, column := range columns {
-			if column.Title == page.Title {
-				foundColumn = true
+		sortOrder := page.SortOrder
+		if err != nil {
+			sortOrder = ""
+		}
+		if page.ValueChain == "" {
+			continue
+		}
 
-				column.Rows = append(column.Rows, Row{Title: page.Title, FileRef: page.FileRef, ID: page.ID, SortOrder: sortOrder})
-			}
+		if (columns[page.ValueChain]) != nil {
+			columns[page.ValueChain] = append(columns[page.ValueChain], Row{Title: page.Title, FileRef: page.FileRef, ID: page.ID, SortOrder: sortOrder})
+		} else {
+			columns[page.ValueChain] = []Row{{Title: page.Title, FileRef: page.FileRef, ID: page.ID, SortOrder: sortOrder}}
 
 		}
-		if !foundColumn {
-			columns = append(columns, Column{Title: page.Title, Rows: []Row{{Title: page.Title, FileRef: page.FileRef, ID: page.ID, SortOrder: sortOrder}}})
-		}
+
 	}
 	return columns, nil
-}
-
-func init() {
-
-	sharedcommands.JobsCmd.AddCommand(&cobra.Command{
-		Use:   "matrix",
-		Short: "Generate matrix",
-		//Args:  cobra.MinimumNArgs(1),
-		Long: ``,
-
-		Run: func(cmd *cobra.Command, args []string) {
-			AnalysePages()
-			// argument := args[0]
-			// switch argument {
-			// case "places":
-
-			// default:
-			// 	log.Fatalf("Unknown argument %s", argument)
-			// }
-		},
-	})
 }

@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	config.Setup(".env")
 	commands.Execute()
 }
