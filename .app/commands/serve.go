@@ -6,7 +6,7 @@ package commands
 import (
 	"log"
 
-	"github.com/365admin/sharepoint-webparts/.app/restapi"
+	"github.com/365admin/sharepoint-webparts/app/restapi"
 	"github.com/spf13/cobra"
 )
 

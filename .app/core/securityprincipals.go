@@ -3,8 +3,8 @@ package core
 import (
 	"log"
 
-	"github.com/365admin/sharepoint-webparts/.app/config"
-	"github.com/365admin/sharepoint-webparts/.app/db"
+	"github.com/365admin/sharepoint-webparts/app/config"
+	"github.com/365admin/sharepoint-webparts/app/db"
 	"github.com/kamva/mgm/v3"
 	"github.com/sethvargo/go-password/password"
 	"go.mongodb.org/mongo-driver/bson"

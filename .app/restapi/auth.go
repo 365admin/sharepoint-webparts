@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/365admin/sharepoint-webparts/.app/audit"
-	"github.com/365admin/sharepoint-webparts/.app/config"
-	"github.com/365admin/sharepoint-webparts/.app/core"
+	"github.com/365admin/sharepoint-webparts/app/audit"
+	"github.com/365admin/sharepoint-webparts/app/config"
+	"github.com/365admin/sharepoint-webparts/app/core"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/golang-jwt/jwt/v5"
 

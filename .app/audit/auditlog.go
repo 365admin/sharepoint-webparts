@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/365admin/sharepoint-webparts/.app/config"
-	"github.com/365admin/sharepoint-webparts/.app/db"
+	"github.com/365admin/sharepoint-webparts/app/config"
+	"github.com/365admin/sharepoint-webparts/app/db"
 	"github.com/kamva/mgm/v3"
 
 	"go.mongodb.org/mongo-driver/bson"
